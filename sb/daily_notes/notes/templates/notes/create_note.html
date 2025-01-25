@@ -1,0 +1,49 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'notes/create_note.css' %}">
+    <title>Create a New Note</title>
+    <script>
+        // Optional: JavaScript for additional functionality can be added here
+        function confirmSubmission() {
+            return confirm('Are you sure you want to save this note?');
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Create a New Note</h1>
+        <nav>
+            <a href="{% url 'scrapbook' %}">Back to Scrapbook</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <form method="post">
+            {% csrf_token %}
+            <div>
+                <label for="content">Note Content:</label>
+                <textarea id="content" name="content" rows="4" required></textarea>
+            </div>
+            <div>
+                <label for="user2">Select User to Share With:</label>
+                <select id="user2" name="user2" required>
+                    {% for user in users %}
+                        <option value="{{ user.id }}">{{ user.username }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit">Create Note</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; {{ current_year }} Your Scrapbook App</p>
+    </footer>
+</body>
+</html>

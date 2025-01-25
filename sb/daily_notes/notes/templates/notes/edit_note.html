@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'notes/delete.css' %}">
+    <title>Edit Note</title>
+</head>
+<body>
+    <h1>Edit Note</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <textarea name="content" rows="10" cols="30">{{ note.content }}</textarea>
+        <br>
+        <button type="submit" class="action-button save-button">Save</button>
+    <form action="{% url 'scrapbook' %}" method="get" style="display:inline;">
+        <button type="submit" class="action-button cancel-button">Cancel</button>
+    </form>
+        
+    </form>
+</body>
+</html>
